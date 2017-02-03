@@ -5,18 +5,21 @@ import InfoBox from './lib/info-box'
 const info = new InfoBox(document.querySelector('.info'))
 setTimeout(() => info.show(), 5000)
 
-const settings = {
-  cellSize: 4, // make it even, make it nice
-  maxNumber: 50000,
-  padding: 1,
-  colors: ['rgb(109, 151, 136)'] // colorPalettes[Math.random() * colorPalettes.length | 0]
-}
-
 const canvas = document.querySelector('.main')
 const width = canvas.width = window.innerWidth
 const height = canvas.height = window.innerHeight
 canvas.style.width = `${width}px`
 canvas.style.height = `${height}px`
+
+const gridSize = Math.max(width, height)
+
+const settings = {
+  cellSize: 4, // make it even, make it nice
+  maxNumber: Math.pow(gridSize, 2),
+  padding: 1,
+  colors: ['rgb(109, 151, 136)'] // colorPalettes[Math.random() * colorPalettes.length | 0]
+}
+
 const ctx = canvas.getContext('2d')
 
 const center = [width / 2 | 0, height / 2 | 0]
