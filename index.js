@@ -1,6 +1,5 @@
 import isPrime from 'quick-is-prime'
 import InfoBox from './lib/info-box'
-// import colorPalettes from './lib/color-palettes.json'
 
 const info = new InfoBox(document.querySelector('.info'))
 setTimeout(() => info.show(), 5000)
@@ -17,7 +16,7 @@ const settings = {
   cellSize: 4, // make it even, make it nice
   maxNumber: Math.pow(gridSize, 2),
   padding: 1,
-  colors: ['rgb(109, 151, 136)'] // colorPalettes[Math.random() * colorPalettes.length | 0]
+  colors: ['rgb(109, 151, 136)']
 }
 
 const ctx = canvas.getContext('2d')
@@ -51,7 +50,7 @@ function drawSpiral () {
   let steps = 0
   let direction = 0
   let curCoord = center
-  let i = 1
+  let curNum = 1
   const radius = settings.cellSize / 2
   const color = settings.colors[Math.random() * settings.colors.length | 0]
   while (true) {
@@ -61,14 +60,14 @@ function drawSpiral () {
       let k = steps
       while (k--) {
         const [x, y] = curCoord
-        if (isPrime(i)) {
+        if (isPrime(curNum)) {
           setTimeout(() => {
             drawCircle(ctx, x + radius, y + radius, radius, color)
-          }, i * 0.1 | 0)
+          }, curNum * 0.1 | 0)
         }
         curCoord = move(curCoord, settings.cellSize + settings.padding)
-        i += 1
-        if (i >= settings.maxNumber) return
+        curNum += 1
+        if (curNum >= settings.maxNumber) return
       }
       direction = (direction + 1) % directions.length
     }
